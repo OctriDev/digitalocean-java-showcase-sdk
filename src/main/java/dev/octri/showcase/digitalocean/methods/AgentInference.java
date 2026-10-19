@@ -52,7 +52,7 @@ public class AgentInference {
         private List<ChatCompletionTool> tools;
         private ChatCompletionRequestToolChoice toolChoice;
         private SdkClient.OptionalValue<Boolean> stream;
-        private Object stop;
+        private List<String> stop;
         private SdkClient.OptionalValue<Map<String, Long>> logitBias;
         private SdkClient.OptionalValue<Boolean> logprobs;
         private SdkClient.OptionalValue<Long> n;
@@ -81,7 +81,7 @@ public class AgentInference {
             public Builder tools(List<ChatCompletionTool> val) { request.tools = val; return this; }
             public Builder toolChoice(ChatCompletionRequestToolChoice val) { request.toolChoice = val; return this; }
             public Builder stream(SdkClient.OptionalValue<Boolean> val) { request.stream = val; return this; }
-            public Builder stop(Object val) { request.stop = val; return this; }
+            public Builder stop(List<String> val) { request.stop = val; return this; }
             public Builder logitBias(SdkClient.OptionalValue<Map<String, Long>> val) { request.logitBias = val; return this; }
             public Builder logprobs(SdkClient.OptionalValue<Boolean> val) { request.logprobs = val; return this; }
             public Builder n(SdkClient.OptionalValue<Long> val) { request.n = val; return this; }
@@ -105,7 +105,7 @@ public class AgentInference {
         public List<ChatCompletionTool> getTools() { return tools; }
         public ChatCompletionRequestToolChoice getToolChoice() { return toolChoice; }
         public SdkClient.OptionalValue<Boolean> getStream() { return stream; }
-        public Object getStop() { return stop; }
+        public List<String> getStop() { return stop; }
         public SdkClient.OptionalValue<Map<String, Long>> getLogitBias() { return logitBias; }
         public SdkClient.OptionalValue<Boolean> getLogprobs() { return logprobs; }
         public SdkClient.OptionalValue<Long> getN() { return n; }
@@ -140,7 +140,7 @@ public class AgentInference {
         List<ChatCompletionTool> tools = request.getTools();
         ChatCompletionRequestToolChoice toolChoice = request.getToolChoice();
         SdkClient.OptionalValue<Boolean> stream = request.getStream();
-        Object stop = request.getStop();
+        List<String> stop = request.getStop();
         SdkClient.OptionalValue<Map<String, Long>> logitBias = request.getLogitBias();
         SdkClient.OptionalValue<Boolean> logprobs = request.getLogprobs();
         SdkClient.OptionalValue<Long> n = request.getN();
@@ -174,6 +174,10 @@ public class AgentInference {
             { Validation.RangeOpts __r = new Validation.RangeOpts(); __r.min = 0d; __r.max = 20d; Validation.validateRange("top_logprobs", topLogprobs.value(), __r); }
         }
 
+        if (stop != null) {
+            { Validation.LengthOpts __i = new Validation.LengthOpts(); __i.min = 1; __i.max = 4; Validation.validateItems("stop", stop, __i); }
+        }
+
         if (n != null && n.isPresent() && n.value() != null) {
             { Validation.RangeOpts __r = new Validation.RangeOpts(); __r.min = 1d; __r.max = 128d; Validation.validateRange("n", n.value(), __r); }
         }
@@ -191,11 +195,11 @@ public class AgentInference {
 
 
 
-    public static java.util.stream.Stream<ChatCompletionChunk> agentInferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, Boolean agent, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, Object stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user) {
+    public static java.util.stream.Stream<ChatCompletionChunk> agentInferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, Boolean agent, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, List<String> stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user) {
         return agentInferenceCreateChatCompletionStream(clientConfig, agent, messages, model, stream, maxTokens, maxCompletionTokens, frequencyPenalty, presencePenalty, topLogprobs, tools, toolChoice, stop, logitBias, logprobs, n, streamOptions, reasoningEffort, seed, metadata, temperature, topP, user, null);
     }
 
-    public static java.util.stream.Stream<ChatCompletionChunk> agentInferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, Boolean agent, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, Object stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user, SdkConfig.RequestOptions options) {
+    public static java.util.stream.Stream<ChatCompletionChunk> agentInferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, Boolean agent, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, List<String> stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user, SdkConfig.RequestOptions options) {
         java.util.Iterator<SdkClient.SdkStreamEvent> _it = SdkClient.stream(
             clientConfig,
             "POST",
