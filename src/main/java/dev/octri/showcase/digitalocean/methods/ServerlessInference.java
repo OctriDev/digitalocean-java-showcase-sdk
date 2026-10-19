@@ -249,7 +249,7 @@ public class ServerlessInference {
         private List<ChatCompletionTool> tools;
         private ChatCompletionRequestToolChoice toolChoice;
         private SdkClient.OptionalValue<Boolean> stream;
-        private Object stop;
+        private List<String> stop;
         private SdkClient.OptionalValue<Map<String, Long>> logitBias;
         private SdkClient.OptionalValue<Boolean> logprobs;
         private SdkClient.OptionalValue<Long> n;
@@ -277,7 +277,7 @@ public class ServerlessInference {
             public Builder tools(List<ChatCompletionTool> val) { request.tools = val; return this; }
             public Builder toolChoice(ChatCompletionRequestToolChoice val) { request.toolChoice = val; return this; }
             public Builder stream(SdkClient.OptionalValue<Boolean> val) { request.stream = val; return this; }
-            public Builder stop(Object val) { request.stop = val; return this; }
+            public Builder stop(List<String> val) { request.stop = val; return this; }
             public Builder logitBias(SdkClient.OptionalValue<Map<String, Long>> val) { request.logitBias = val; return this; }
             public Builder logprobs(SdkClient.OptionalValue<Boolean> val) { request.logprobs = val; return this; }
             public Builder n(SdkClient.OptionalValue<Long> val) { request.n = val; return this; }
@@ -300,7 +300,7 @@ public class ServerlessInference {
         public List<ChatCompletionTool> getTools() { return tools; }
         public ChatCompletionRequestToolChoice getToolChoice() { return toolChoice; }
         public SdkClient.OptionalValue<Boolean> getStream() { return stream; }
-        public Object getStop() { return stop; }
+        public List<String> getStop() { return stop; }
         public SdkClient.OptionalValue<Map<String, Long>> getLogitBias() { return logitBias; }
         public SdkClient.OptionalValue<Boolean> getLogprobs() { return logprobs; }
         public SdkClient.OptionalValue<Long> getN() { return n; }
@@ -334,7 +334,7 @@ public class ServerlessInference {
         List<ChatCompletionTool> tools = request.getTools();
         ChatCompletionRequestToolChoice toolChoice = request.getToolChoice();
         SdkClient.OptionalValue<Boolean> stream = request.getStream();
-        Object stop = request.getStop();
+        List<String> stop = request.getStop();
         SdkClient.OptionalValue<Map<String, Long>> logitBias = request.getLogitBias();
         SdkClient.OptionalValue<Boolean> logprobs = request.getLogprobs();
         SdkClient.OptionalValue<Long> n = request.getN();
@@ -368,6 +368,10 @@ public class ServerlessInference {
             { Validation.RangeOpts __r = new Validation.RangeOpts(); __r.min = 0d; __r.max = 20d; Validation.validateRange("top_logprobs", topLogprobs.value(), __r); }
         }
 
+        if (stop != null) {
+            { Validation.LengthOpts __i = new Validation.LengthOpts(); __i.min = 1; __i.max = 4; Validation.validateItems("stop", stop, __i); }
+        }
+
         if (n != null && n.isPresent() && n.value() != null) {
             { Validation.RangeOpts __r = new Validation.RangeOpts(); __r.min = 1d; __r.max = 128d; Validation.validateRange("n", n.value(), __r); }
         }
@@ -385,11 +389,11 @@ public class ServerlessInference {
 
 
 
-    public static java.util.stream.Stream<ChatCompletionChunk> inferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, Object stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user) {
+    public static java.util.stream.Stream<ChatCompletionChunk> inferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, List<String> stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user) {
         return inferenceCreateChatCompletionStream(clientConfig, messages, model, stream, maxTokens, maxCompletionTokens, frequencyPenalty, presencePenalty, topLogprobs, tools, toolChoice, stop, logitBias, logprobs, n, streamOptions, reasoningEffort, seed, metadata, temperature, topP, user, null);
     }
 
-    public static java.util.stream.Stream<ChatCompletionChunk> inferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, Object stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user, SdkConfig.RequestOptions options) {
+    public static java.util.stream.Stream<ChatCompletionChunk> inferenceCreateChatCompletionStream(SdkConfig.ClientConfig clientConfig, List<ChatMessage> messages, String model, Boolean stream, SdkClient.OptionalValue<Long> maxTokens, SdkClient.OptionalValue<Long> maxCompletionTokens, SdkClient.OptionalValue<Double> frequencyPenalty, SdkClient.OptionalValue<Double> presencePenalty, SdkClient.OptionalValue<Long> topLogprobs, List<ChatCompletionTool> tools, ChatCompletionRequestToolChoice toolChoice, List<String> stop, SdkClient.OptionalValue<Map<String, Long>> logitBias, SdkClient.OptionalValue<Boolean> logprobs, SdkClient.OptionalValue<Long> n, SdkClient.OptionalValue<ChatCompletionRequestStreamOptions> streamOptions, SdkClient.OptionalValue<ChatCompletionRequestReasoningEffortEnum> reasoningEffort, SdkClient.OptionalValue<Long> seed, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<Double> topP, String user, SdkConfig.RequestOptions options) {
         java.util.Iterator<SdkClient.SdkStreamEvent> _it = SdkClient.stream(
             clientConfig,
             "POST",
@@ -592,7 +596,7 @@ public class ServerlessInference {
     public static class InferenceCreateEmbeddingRequest {
 
         private String model;
-        private Object input;
+        private List<String> input;
         private String user;
         private EmbeddingsRequestEncodingFormatEnum encodingFormat;
 
@@ -603,13 +607,13 @@ public class ServerlessInference {
         public static class Builder {
             private final InferenceCreateEmbeddingRequest request = new InferenceCreateEmbeddingRequest();
             public Builder model(String val) { request.model = val; return this; }
-            public Builder input(Object val) { request.input = val; return this; }
+            public Builder input(List<String> val) { request.input = val; return this; }
             public Builder user(String val) { request.user = val; return this; }
             public Builder encodingFormat(EmbeddingsRequestEncodingFormatEnum val) { request.encodingFormat = val; return this; }
             public InferenceCreateEmbeddingRequest build() { return request; }
         }
         public String getModel() { return model; }
-        public Object getInput() { return input; }
+        public List<String> getInput() { return input; }
         public String getUser() { return user; }
         public EmbeddingsRequestEncodingFormatEnum getEncodingFormat() { return encodingFormat; }
     }
@@ -626,9 +630,11 @@ public class ServerlessInference {
      */
     public static EmbeddingsResponse inferenceCreateEmbedding(SdkConfig.ClientConfig clientConfig, InferenceCreateEmbeddingRequest request, SdkConfig.RequestOptions options) {
         String model = request.getModel();
-        Object input = request.getInput();
+        List<String> input = request.getInput();
         String user = request.getUser();
         EmbeddingsRequestEncodingFormatEnum encodingFormat = request.getEncodingFormat();
+
+        { Validation.LengthOpts __i = new Validation.LengthOpts(); __i.min = 1; __i.max = 2048; Validation.validateItems("input", input, __i); }
 
         return SdkClient.request(clientConfig, "POST", "/v1/embeddings", null, SdkClient.q("model", model, "input", input, "user", SdkClient.omitIfNull(user), "encoding_format", SdkClient.omitIfNull(encodingFormat)), null, new TypeReference<EmbeddingsResponse>(){}, "inferenceCreateEmbedding", null, SdkClient.ResponseDecoder.JSON, options, java.util.Map.of("401", Error2.class, "429", Error2.class, "500", Error2.class, "default", Error2.class)).data;
     }
@@ -851,7 +857,7 @@ public class ServerlessInference {
         private SdkClient.OptionalValue<CreateResponseRequestStreamOptions> streamOptions;
         private SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> tools;
         private CreateResponseRequestToolChoice toolChoice;
-        private SdkClient.OptionalValue<Object> stop;
+        private SdkClient.OptionalValue<List<String>> stop;
         private SdkClient.OptionalValue<Map<String, String>> metadata;
         private SdkClient.OptionalValue<String> user;
 
@@ -871,7 +877,7 @@ public class ServerlessInference {
             public Builder streamOptions(SdkClient.OptionalValue<CreateResponseRequestStreamOptions> val) { request.streamOptions = val; return this; }
             public Builder tools(SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> val) { request.tools = val; return this; }
             public Builder toolChoice(CreateResponseRequestToolChoice val) { request.toolChoice = val; return this; }
-            public Builder stop(SdkClient.OptionalValue<Object> val) { request.stop = val; return this; }
+            public Builder stop(SdkClient.OptionalValue<List<String>> val) { request.stop = val; return this; }
             public Builder metadata(SdkClient.OptionalValue<Map<String, String>> val) { request.metadata = val; return this; }
             public Builder user(SdkClient.OptionalValue<String> val) { request.user = val; return this; }
             public InferenceCreateResponseRequest build() { return request; }
@@ -886,7 +892,7 @@ public class ServerlessInference {
         public SdkClient.OptionalValue<CreateResponseRequestStreamOptions> getStreamOptions() { return streamOptions; }
         public SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> getTools() { return tools; }
         public CreateResponseRequestToolChoice getToolChoice() { return toolChoice; }
-        public SdkClient.OptionalValue<Object> getStop() { return stop; }
+        public SdkClient.OptionalValue<List<String>> getStop() { return stop; }
         public SdkClient.OptionalValue<Map<String, String>> getMetadata() { return metadata; }
         public SdkClient.OptionalValue<String> getUser() { return user; }
     }
@@ -912,7 +918,7 @@ public class ServerlessInference {
         SdkClient.OptionalValue<CreateResponseRequestStreamOptions> streamOptions = request.getStreamOptions();
         SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> tools = request.getTools();
         CreateResponseRequestToolChoice toolChoice = request.getToolChoice();
-        SdkClient.OptionalValue<Object> stop = request.getStop();
+        SdkClient.OptionalValue<List<String>> stop = request.getStop();
         SdkClient.OptionalValue<Map<String, String>> metadata = request.getMetadata();
         SdkClient.OptionalValue<String> user = request.getUser();
 
@@ -928,16 +934,20 @@ public class ServerlessInference {
             { Validation.RangeOpts __r = new Validation.RangeOpts(); __r.min = 0d; __r.max = 1d; Validation.validateRange("top_p", topP.value(), __r); }
         }
 
+        if (stop != null && stop.isPresent() && stop.value() != null) {
+            { Validation.LengthOpts __i = new Validation.LengthOpts(); __i.min = 1; __i.max = 4; Validation.validateItems("stop", stop.value(), __i); }
+        }
+
         return SdkClient.request(clientConfig, "POST", "/v1/responses", null, SdkClient.q("model", model, "input", input, "max_output_tokens", maxOutputTokens, "temperature", temperature, "stream", stream, "instructions", instructions, "top_p", topP, "stream_options", streamOptions, "tools", tools, "tool_choice", SdkClient.omitIfNull(toolChoice), "stop", stop, "metadata", metadata, "user", user), null, new TypeReference<CreateResponseResponse>(){}, "inferenceCreateResponse", null, SdkClient.ResponseDecoder.JSON, options, java.util.Map.of("401", Error2.class, "429", Error2.class, "500", Error2.class, "default", Error2.class)).data;
     }
 
 
 
-    public static java.util.stream.Stream<CreateResponseStreamResponse> inferenceCreateResponseStream(SdkConfig.ClientConfig clientConfig, String model, Object input, Boolean stream, SdkClient.OptionalValue<Long> maxOutputTokens, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<String> instructions, SdkClient.OptionalValue<Double> topP, SdkClient.OptionalValue<CreateResponseRequestStreamOptions> streamOptions, SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> tools, CreateResponseRequestToolChoice toolChoice, SdkClient.OptionalValue<Object> stop, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<String> user) {
+    public static java.util.stream.Stream<CreateResponseStreamResponse> inferenceCreateResponseStream(SdkConfig.ClientConfig clientConfig, String model, Object input, Boolean stream, SdkClient.OptionalValue<Long> maxOutputTokens, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<String> instructions, SdkClient.OptionalValue<Double> topP, SdkClient.OptionalValue<CreateResponseRequestStreamOptions> streamOptions, SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> tools, CreateResponseRequestToolChoice toolChoice, SdkClient.OptionalValue<List<String>> stop, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<String> user) {
         return inferenceCreateResponseStream(clientConfig, model, input, stream, maxOutputTokens, temperature, instructions, topP, streamOptions, tools, toolChoice, stop, metadata, user, null);
     }
 
-    public static java.util.stream.Stream<CreateResponseStreamResponse> inferenceCreateResponseStream(SdkConfig.ClientConfig clientConfig, String model, Object input, Boolean stream, SdkClient.OptionalValue<Long> maxOutputTokens, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<String> instructions, SdkClient.OptionalValue<Double> topP, SdkClient.OptionalValue<CreateResponseRequestStreamOptions> streamOptions, SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> tools, CreateResponseRequestToolChoice toolChoice, SdkClient.OptionalValue<Object> stop, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<String> user, SdkConfig.RequestOptions options) {
+    public static java.util.stream.Stream<CreateResponseStreamResponse> inferenceCreateResponseStream(SdkConfig.ClientConfig clientConfig, String model, Object input, Boolean stream, SdkClient.OptionalValue<Long> maxOutputTokens, SdkClient.OptionalValue<Double> temperature, SdkClient.OptionalValue<String> instructions, SdkClient.OptionalValue<Double> topP, SdkClient.OptionalValue<CreateResponseRequestStreamOptions> streamOptions, SdkClient.OptionalValue<List<CreateResponseRequestToolsItem>> tools, CreateResponseRequestToolChoice toolChoice, SdkClient.OptionalValue<List<String>> stop, SdkClient.OptionalValue<Map<String, String>> metadata, SdkClient.OptionalValue<String> user, SdkConfig.RequestOptions options) {
         java.util.Iterator<SdkClient.SdkStreamEvent> _it = SdkClient.stream(
             clientConfig,
             "POST",

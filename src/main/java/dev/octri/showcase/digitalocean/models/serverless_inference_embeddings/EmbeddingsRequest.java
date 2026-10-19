@@ -5,6 +5,7 @@ package dev.octri.showcase.digitalocean.models.serverless_inference_embeddings;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.octri.showcase.digitalocean.Validation;
+import java.util.List;
 import javax.annotation.Nullable;
 
 /**
@@ -20,7 +21,7 @@ public final class EmbeddingsRequest {
     /**
      * A single string or 1–2048 strings; each string produces one row in `data`, in order.
      */
-    public Object input;
+    public List<String> input;
     /**
      * Optional end-user identifier to help with abuse monitoring.
      */
@@ -33,11 +34,11 @@ public final class EmbeddingsRequest {
     public static Builder builder() { return new Builder(); }
     public static final class Builder {
         private String model;
-        private Object input;
+        private List<String> input;
         private String user;
         private EmbeddingsRequestEncodingFormatEnum encodingFormat;
         public Builder model(String value) { this.model = value; return this; }
-        public Builder input(Object value) { this.input = value; return this; }
+        public Builder input(List<String> value) { this.input = value; return this; }
         public Builder user(String value) { this.user = value; return this; }
         public Builder encodingFormat(EmbeddingsRequestEncodingFormatEnum value) { this.encodingFormat = value; return this; }
         public EmbeddingsRequest build() {
@@ -45,6 +46,7 @@ public final class EmbeddingsRequest {
             Validation.validateRequired("model", this.model);
             result.model = this.model;
             Validation.validateRequired("input", this.input);
+            { Validation.LengthOpts __items = new Validation.LengthOpts(); __items.min = 1; __items.max = 2048; Validation.validateItems("input", this.input, __items); }
             result.input = this.input;
             result.user = this.user;
             result.encodingFormat = this.encodingFormat;
