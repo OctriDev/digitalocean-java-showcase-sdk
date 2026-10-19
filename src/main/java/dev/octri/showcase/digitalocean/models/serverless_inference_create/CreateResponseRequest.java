@@ -58,7 +58,7 @@ public final class CreateResponseRequest {
     /**
      * Up to 4 sequences where the API will stop generating further tokens.
      */
-    @Nullable public Object stop;
+    @Nullable public List<String> stop;
     /**
      * Set of key-value pairs that can be attached to the request.
      */
@@ -80,7 +80,7 @@ public final class CreateResponseRequest {
         private CreateResponseRequestStreamOptions streamOptions;
         private List<CreateResponseRequestToolsItem> tools;
         private CreateResponseRequestToolChoice toolChoice;
-        private Object stop;
+        private List<String> stop;
         private Map<String, String> metadata;
         private String user;
         public Builder model(String value) { this.model = value; return this; }
@@ -93,7 +93,7 @@ public final class CreateResponseRequest {
         public Builder streamOptions(CreateResponseRequestStreamOptions value) { this.streamOptions = value; return this; }
         public Builder tools(List<CreateResponseRequestToolsItem> value) { this.tools = value; return this; }
         public Builder toolChoice(CreateResponseRequestToolChoice value) { this.toolChoice = value; return this; }
-        public Builder stop(Object value) { this.stop = value; return this; }
+        public Builder stop(List<String> value) { this.stop = value; return this; }
         public Builder metadata(Map<String, String> value) { this.metadata = value; return this; }
         public Builder user(String value) { this.user = value; return this; }
         public CreateResponseRequest build() {
@@ -119,6 +119,9 @@ public final class CreateResponseRequest {
             result.streamOptions = this.streamOptions;
             result.tools = this.tools;
             result.toolChoice = this.toolChoice;
+            if (this.stop != null) {
+                { Validation.LengthOpts __items = new Validation.LengthOpts(); __items.min = 1; __items.max = 4; Validation.validateItems("stop", this.stop, __items); }
+            }
             result.stop = this.stop;
             result.metadata = this.metadata;
             result.user = this.user;
