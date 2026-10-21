@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 
-public class ActionGateway extends ActionGatewayPart2 {
+public class ActionGateway extends ActionGatewayUsersOperations {
 
     /**
      * ConnectionCreateCredentialTeamCredential.

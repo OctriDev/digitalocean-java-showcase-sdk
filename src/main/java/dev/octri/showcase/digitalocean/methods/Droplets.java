@@ -335,20 +335,20 @@ public class Droplets {
 
 
 
-    public static class DropletsListBackupPoliciesRequest {
+    public static class ListAllBackupPoliciesRequest {
 
         private Long perPage;
         private Long page;
 
-        private DropletsListBackupPoliciesRequest() {}
+        private ListAllBackupPoliciesRequest() {}
 
         public static Builder builder() { return new Builder(); }
 
         public static class Builder {
-            private final DropletsListBackupPoliciesRequest request = new DropletsListBackupPoliciesRequest();
+            private final ListAllBackupPoliciesRequest request = new ListAllBackupPoliciesRequest();
             public Builder perPage(Long val) { request.perPage = val; return this; }
             public Builder page(Long val) { request.page = val; return this; }
-            public DropletsListBackupPoliciesRequest build() { return request; }
+            public ListAllBackupPoliciesRequest build() { return request; }
         }
         public Long getPerPage() { return perPage; }
         public Long getPage() { return page; }
@@ -357,14 +357,14 @@ public class Droplets {
     /**
      * To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
      */
-    public static AllDropletBackupPolicies dropletsListBackupPolicies(SdkConfig.ClientConfig clientConfig, DropletsListBackupPoliciesRequest request) {
-        return dropletsListBackupPolicies(clientConfig, request, null);
+    public static AllDropletBackupPolicies listAllBackupPolicies(SdkConfig.ClientConfig clientConfig, ListAllBackupPoliciesRequest request) {
+        return listAllBackupPolicies(clientConfig, request, null);
     }
 
     /**
      * To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
      */
-    public static AllDropletBackupPolicies dropletsListBackupPolicies(SdkConfig.ClientConfig clientConfig, DropletsListBackupPoliciesRequest request, SdkConfig.RequestOptions options) {
+    public static AllDropletBackupPolicies listAllBackupPolicies(SdkConfig.ClientConfig clientConfig, ListAllBackupPoliciesRequest request, SdkConfig.RequestOptions options) {
         Long perPage = request.getPerPage();
         Long page = request.getPage();
 
@@ -376,7 +376,7 @@ public class Droplets {
             { Validation.RangeOpts __r = new Validation.RangeOpts(); __r.min = 1d; Validation.validateRange("page", page, __r); }
         }
 
-        return SdkClient.request(clientConfig, "GET", "/v2/droplets/backups/policies", SdkClient.q("per_page", SdkClient.queryValue(perPage, "form", true), "page", SdkClient.queryValue(page, "form", true)), null, null, new TypeReference<AllDropletBackupPolicies>(){}, "dropletsListBackupPolicies", null, SdkClient.ResponseDecoder.JSON, options, java.util.Map.of("401", Error2.class, "404", Error2.class, "429", Error2.class, "500", Error2.class, "default", Error2.class)).data;
+        return SdkClient.request(clientConfig, "GET", "/v2/droplets/backups/policies", SdkClient.q("per_page", SdkClient.queryValue(perPage, "form", true), "page", SdkClient.queryValue(page, "form", true)), null, null, new TypeReference<AllDropletBackupPolicies>(){}, "listAllBackupPolicies", null, SdkClient.ResponseDecoder.JSON, options, java.util.Map.of("401", Error2.class, "404", Error2.class, "429", Error2.class, "500", Error2.class, "default", Error2.class)).data;
     }
 
 

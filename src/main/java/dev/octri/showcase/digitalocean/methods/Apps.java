@@ -11,7 +11,7 @@ import dev.octri.showcase.digitalocean.models.apps_app_spec.AppSpecRequest;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class Apps extends AppsPart2 {
+public class Apps extends AppsHealthOperations {
 
     public static final class AppsCreateAccept {
         public static final AppsCreateAccept APPLICATION_JSON = new AppsCreateAccept("application/json");

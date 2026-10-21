@@ -49,7 +49,7 @@ import dev.octri.showcase.digitalocean.models.agent_platform_api_custom.CustomMo
 import java.util.List;
 import java.util.Map;
 
-public class AgentPlatformApi extends AgentPlatformApiPart4 {
+public class AgentPlatformApi extends AgentPlatformApiGenaiListScenarioSetsOperations {
 
     public static final class GenaiListModelEvaluationRunsCandidateTypesItem {
         public static final GenaiListModelEvaluationRunsCandidateTypesItem CANDIDATE_MODEL_SOURCE_DEDICATED = new GenaiListModelEvaluationRunsCandidateTypesItem("CANDIDATE_MODEL_SOURCE_DEDICATED");

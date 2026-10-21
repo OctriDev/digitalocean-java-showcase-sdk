@@ -14,7 +14,7 @@ import dev.octri.showcase.digitalocean.models.shared.Urn;
 import dev.octri.showcase.digitalocean.models.shared_network.NetworkV4TypeEnum;
 import java.util.List;
 
-public class Monitoring extends MonitoringPart2 {
+public class Monitoring extends MonitoringSinksOperations {
 
     public static final class MonitoringGetDropletBandwidthMetricsDirection {
         public static final MonitoringGetDropletBandwidthMetricsDirection INBOUND = new MonitoringGetDropletBandwidthMetricsDirection("inbound");
