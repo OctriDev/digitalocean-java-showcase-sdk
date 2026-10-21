@@ -5216,15 +5216,15 @@ public class DigitalOcean {
         /**
          * To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
          */
-        public AllDropletBackupPolicies listBackupPolicies(Droplets.DropletsListBackupPoliciesRequest request) {
-            return Droplets.dropletsListBackupPolicies(this.clientConfig, request);
+        public AllDropletBackupPolicies listAllBackupPolicies(Droplets.ListAllBackupPoliciesRequest request) {
+            return Droplets.listAllBackupPolicies(this.clientConfig, request);
         }
 
         /**
          * To list information about the backup policies for all Droplets in the account, send a GET request to `/v2/droplets/backups/policies`.
          */
-        public AllDropletBackupPolicies listBackupPolicies(Droplets.DropletsListBackupPoliciesRequest request, SdkConfig.RequestOptions options) {
-            return Droplets.dropletsListBackupPolicies(this.clientConfig, request, options);
+        public AllDropletBackupPolicies listAllBackupPolicies(Droplets.ListAllBackupPoliciesRequest request, SdkConfig.RequestOptions options) {
+            return Droplets.listAllBackupPolicies(this.clientConfig, request, options);
         }
 
         /**

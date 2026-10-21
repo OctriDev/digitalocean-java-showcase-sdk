@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 
-public class HarnessRuntime extends HarnessRuntimePart3 {
+public class HarnessRuntime extends HarnessRuntimeHarnessListTriggerExecutionsOperations {
 
     /**
      * AgentManifestMetadata.
